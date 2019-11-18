@@ -338,6 +338,7 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 	CGPoint l = [t locationInView:self];
 	
 	if (t.state == UIGestureRecognizerStateRecognized) {
+        [self.manager dragEvent:(Boolean *)true];
 		glBindBuffer(GL_ARRAY_BUFFER, dotsBuffer);
 		
 		PPSSignaturePoint touchPoint = ViewPointToGL(l, self.bounds, (GLKVector3){1, 1, 1});
@@ -370,6 +371,7 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 		addVertex(&dotsLength, touchPoint);
 		
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
+        [self.manager dragEvent:(Boolean *)false];
 	}
 	
 	[self setNeedsDisplay];
